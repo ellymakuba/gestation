@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+    <!--
+        See http://www.liquibase.org/manual/home#available_database_refactorings
+        for a list of supported elements and attributes
+    -->
+
+	<changeSet id="gestation_24" author="nbore">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="gestation" />
+			</not>
+		</preConditions>
+		<comment>
+			gestation table for Gestation module
+		</comment>
+		<createTable tableName="gestation">
+
+			<column name="id" type="int(10)" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false"  />
+			</column>
+
+			<column name="person_uuid" type="char(38)">
+				<constraints nullable="true"/>
+			</column>
+
+			<column name="patient_name" type="text" />
+
+			<column name="identifier" type="text" />
+
+			<column name="age" type="double" />
+
+
+			<!--Basic-->
+			<column name="date_captured" type="datetime" />
+
+			<column name="hosp_no" type="int" />
+
+			<column name="study_no" type="text" />
+
+			<column name="phone_no" type="text" />
+
+			<column name="sbp" type="text" />
+
+			<column name="dbp" type="text" />
+
+			<column name="weight" type="text" />
+
+			<column name="height" type="double" />
+
+            <column name="gest" type="double" />
+            <column name="expectedDateOfBirth" type="datetime" />
+
+
+			<!--Day1-->
+
+			<column name="rbs_poc" type="text" />
+
+			<column name="hours_last_meal" type="double" />
+
+			<column name="one_hour_50gGCT_poc" type="text" />
+
+			<column name="hba1c_poc" type="double" />
+			<!--Day2-->
+			<column name="fbs_poc" type="text" />
+
+			<column name="fbs_venous" type="text" />
+
+			<column name="fbs_date" type="datetime" />
+
+			<column name="one_hour_p75gGTT_poc" type="text" />
+
+			<column name="one_hour_venous" type="text" />
+
+			<column name="one_hour_p75_date" type="datetime" />
+
+			<column name="two_hour_p75gGTT_poc" type="text" />
+
+			<column name="two_hour_venous" type="text" />
+
+			<column name="two_hour_p75_date" type="datetime" />
+
+			<column name="venous_hba1c" type="text" />
+
+			<column name="fhg_hb" type="double" />
+
+			<column name="wbc" type="text" />
+
+			<column name="neutrophil" type="text" />
+
+			<column name="platelets" type="text" />
+
+			<column name="rbc" type="text" />
+			<!--6 Weeks post delivery-->
+			<column name="baby_weight" type="text" />
+
+			<column name="post_fbs_poc" type="text" />
+
+			<column name="post_fbs_venous" type="text" />
+			<!--questionnaire-->
+			<column name="diagnised_diabetes" type="double" />
+
+			<column name="diagnised_diabetes_pg" type="double" />
+
+			<column name="family_diabetes_history" type="double" />
+
+			<column name="family_member_index" type="text" />
+
+			<column name="est_prepg_weight" type="text" />
+
+			<column name="est_prepg_height" type="double" />
+
+
+
+
+
+
+			<column name="uuid" type="char(38)">
+				<constraints nullable="false"/>
+			</column>
+
+			<column name="voided" type="int(6)" defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+
+			<column name="voided_by" type="int(11)">
+				<constraints nullable="true" />
+			</column>
+
+			<column name="date_voided" type="datetime">
+				<constraints nullable="true" />
+			</column>
+
+			<column name="void_reason" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
+
+			<column name="creator" type="int(11)" defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="date_created" type="datetime">
+				<constraints nullable="true" />
+			</column>
+
+			<column name="date_changed" type="datetime">
+				<constraints nullable="true" />
+			</column>
+
+			<column name="changed_by" type="int(11)">
+				<constraints nullable="true" />
+			</column>
+
+		</createTable>
+	</changeSet>
+
+	<changeSet author="nbore" id="gestation_25">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<indexExists indexName="person_uuid_gestation"/>
+			</not>
+		</preConditions>
+		<comment>Creating index for gestation</comment>
+		<createIndex tableName="gestation" indexName="person_uuid_gestation">
+			<column name="person_uuid" />
+		</createIndex>
+		<createIndex tableName="gestation" indexName="user_who_voided_gestation">
+			<column name="voided_by" />
+		</createIndex>
+		<createIndex tableName="gestation" indexName="user_who_changed_gestation">
+			<column name="changed_by" />
+		</createIndex>
+		<createIndex tableName="gestation" indexName="user_who_created_gestation">
+			<column name="creator" />
+		</createIndex>
+	</changeSet>
+	<changeSet author="nbore" id="gestation_27">
+		<preConditions onFail="MARK_RAN">
+			<and>
+				<columnExists tableName="gestation" columnName="status"/>
+
+			</and>
+		</preConditions>
+		<dropColumn tableName="gestation" columnName="hosp_no" />
+	</changeSet>
+
+	<changeSet author="nbore" id="gestation_28">
+		<preConditions onFail="MARK_RAN">
+			<and>
+				<not>
+					<columnExists tableName="gestation" columnName="hosp_no" />
+				</not>
+			</and>
+		</preConditions>
+		<addColumn tableName="gestation">
+			<column name="hosp_no" type="varchar(50)">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+	</changeSet>
+
+    <changeSet author="nbore" id="gestation_29">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <not>
+                    <columnExists tableName="gestation" columnName="a1cnow" />
+                </not>
+            </and>
+        </preConditions>
+        <addColumn tableName="gestation">
+            <column name="a1cnow" type="varchar(50)">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+    </changeSet>
+
+
+</databaseChangeLog>

@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+	<class name="org.openmrs.module.gestation.Gestation"  table="gestation">
+        <cache usage="read-write"/>
+        <id name="id" type="int" column="id" unsaved-value="0">
+            <generator class="org.openmrs.api.db.hibernate.NativeIfNotAssignedIdentityGenerator"/>
+        </id>
+        <discriminator column="id" insert="false"/>
+		<many-to-one name="person" class="org.openmrs.Person" column="person_uuid" property-ref="uuid" />
+		<property column="patient_name" name="patientName" type="java.lang.String"/>
+		<property column="identifier" name="identifier" type="java.lang.String"/>
+		<property column="age" name="age" type="double"/>		<!--Basic-->
+		<property column="date_captured" name="dateCaptured" type="java.util.Date"/>
+		<property column="hosp_no" name="hospNo" type="java.lang.String"/>
+		<property column="study_no" name="studyNo" type="java.lang.String"/>
+		<property column="phone_no" name="phoneNo" type="java.lang.String"/>
+		<property column="sbp" name="sbp" type="java.lang.String"/>
+		<property column="dbp" name="dbp" type="java.lang.String"/>
+		<property column="weight" name="weight" type="java.lang.String"/>
+		<property column="height" name="height" type="double" not-null="false"/>
+        <property column="gest" name="gestational" type="double" not-null="false"/>
+        <property name="expectedDateOfBirth" type="java.util.Date" column="expectedDateOfBirth" not-null="true"/>		<!--Day1-->
+		<property column="rbs_poc" name="rbsPoc" type="java.lang.String"/>
+		<property column="hours_last_meal" name="hoursLastMeal" type="double"/>
+		<property column="one_hour_50gGCT_poc" name="oneHour50gGCTPoc" type="java.lang.String"/>
+		<property column="hba1c_poc" name="hba1cPoc" type="double"/>		<!--Day2-->
+		<property column="fbs_poc" name="fbsPoc" type="java.lang.String"/>
+		<property column="fbs_venous" name="fbsVenous" type="java.lang.String"/>
+		<property column="one_hour_p75gGTT_poc" name="oneHourP75gGTTPoc" type="java.lang.String"/>
+		<property column="one_hour_venous" name="oneHourVenous" type="java.lang.String"/>
+		<property column="two_hour_p75gGTT_poc" name="twoHourP75gGTTPoc" type="java.lang.String"/>
+		<property column="fbs_date" name="fbsDate" type="java.util.Date"/>
+		<property column="one_hour_p75_date" name="oneHourP75Date" type="java.util.Date"/>
+		<property column="two_hour_p75_date" name="twoHourP75Date" type="java.util.Date"/>
+		<property column="two_hour_venous" name="twoHourVenous" type="java.lang.String"/>
+		<property column="venous_hba1c" name="venousHba1c" type="java.lang.String"/>
+		<property column="fhg_hb" name="fhgHb" type="double"/>
+		<property column="wbc" name="wbc" type="java.lang.String"/>
+		<property column="neutrophil" name="neutrophil" type="java.lang.String"/>
+		<property column="platelets" name="platelets" type="java.lang.String"/>
+		<property column="rbc" name="rbc" type="java.lang.String"/>		<!--6 Weeks post delivery-->
+		<property column="baby_weight" name="babyWeight" type="java.lang.String"/>
+		<property column="post_fbs_poc" name="postFbsPoc" type="java.lang.String"/>
+		<property column="post_fbs_venous" name="postFbsVenous" type="java.lang.String"/>		<!--questionnaire-->
+		<property column="diagnised_diabetes" name="diagnisedDiabetes" type="double"/>
+		<property column="diagnised_diabetes_pg" name="diagnisedDiabetesPg" type="double"/>
+		<property column="family_diabetes_history" name="familyDiabetesHistory" type="double"/>
+		<property column="family_member_index" name="familyMemberIndex" type="java.lang.String"/>
+		<property column="est_prepg_weight" name="estPrepgWeight" type="java.lang.String"/>
+		<property column="est_prepg_height" name="estPrepgHeight" type="double"/>
+        <many-to-one name="creator" class="org.openmrs.User" column="creator" not-null="true"/>
+        <property name="dateCreated" type="java.util.Date" column="date_created" not-null="true"/>
+        <property name="voided" type="boolean" not-null="true"/>
+        <many-to-one name="voidedBy" class="org.openmrs.User" column="voided_by"/>
+        <property name="dateVoided" type="java.util.Date" column="date_voided"/>
+        <property name="voidReason" type="java.lang.String" column="void_reason" length="255"/>
+		<many-to-one name="changedBy" class="org.openmrs.User" column="changed_by" />
+		<property name="dateChanged" type="java.util.Date" column="date_changed" length="19" />
+        <property name="uuid" type="string" length="38" not-null="true" unique="true"/>
+        <property column="a1cnow" name="a1cnow" type="java.lang.String"/>
+    </class>
+
+</hibernate-mapping>

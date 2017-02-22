@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class name="org.openmrs.module.gestation.ChildHealthCard" table="child_health_card">
+        <cache usage="read-write"/>
+        <id name="id" type="int" column="child_health_card_id" unsaved-value="0">
+            <generator class="org.openmrs.api.db.hibernate.NativeIfNotAssignedIdentityGenerator"/>
+        </id>
+        <discriminator column="child_health_card_id" insert="false"/>
+        <property name="facilityName" type="java.lang.String" column="facility_name" length="255"/>
+        <property name="deliveryPointNo" type="java.lang.Integer" column="delivery_no" length="11"/>
+        <property name="sex"  type="java.lang.String" column="sex" length="255"/>
+        <property name="childClinicNo"  type="java.lang.Integer"  column="clinic_no" not-null="false"/>
+        <property name="dateFirstSeen" type="java.util.Date" column="date_first_seen"  not-null="false"/>
+        <property name="dOB" type="java.util.Date" column="dob"  length="255"/>
+        <property name="placeOfBirth" type="java.lang.String" column="place_of_birth" length="255"/>
+        <property name="father" type="java.lang.String" column="father" length="255"/>
+        <property name="mother" type="java.lang.String" column="mother" length="255"/>
+        <property name="telephone" type="java.lang.Integer" column="telephone" length="255"/>
+        <property name="uuid" type="string" length="38" not-null="true" unique="true"/>
+
+        <many-to-one name="creator" class="org.openmrs.User" column="creator" not-null="true"/>
+        <property name="dateCreated" type="java.util.Date" column="datecreated" not-null="true"/>
+        <property name="voided" type="boolean" column="voided" not-null="true"/>
+        <many-to-one name="voidedBy" class="org.openmrs.User"  column="voided_by"/>
+        <property name="dateVoided" type="java.util.Date" column="date_voided"/>
+        <property name="voidReason" type="java.lang.String" column="void_reason" length="255"/>
+    </class>
+</hibernate-mapping>

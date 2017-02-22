@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/gestation.iml" filepath="$PROJECT_DIR$/gestation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gestation.iml" filepath="$PROJECT_DIR$/gestation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/api/gestation-api.iml" filepath="$PROJECT_DIR$/api/gestation-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/api/gestation-api.iml" filepath="$PROJECT_DIR$/api/gestation-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/omod/gestation-omod.iml" filepath="$PROJECT_DIR$/omod/gestation-omod.iml" />
+      <module fileurl="file://$PROJECT_DIR$/omod/gestation-omod.iml" filepath="$PROJECT_DIR$/omod/gestation-omod.iml" />
+    </modules>
+  </component>
+</project>

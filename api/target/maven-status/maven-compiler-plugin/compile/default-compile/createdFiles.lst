@@ -1,0 +1,8 @@
+org/openmrs/module/gestation/api/GestationService.class
+org/openmrs/module/gestation/ChildHealthCard.class
+org/openmrs/module/gestation/GestationActivator.class
+org/openmrs/module/gestation/api/impl/GestationServiceImpl.class
+org/openmrs/module/gestation/Gestation.class
+org/openmrs/module/gestation/api/db/GestationDAO.class
+org/openmrs/module/gestation/ANC.class
+org/openmrs/module/gestation/api/db/hibernate/HibernateGestationDAO.class
